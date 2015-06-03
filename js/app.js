@@ -28,21 +28,33 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(x,y) {
     //image for player character
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-cat-girl.png';
     this.x = x;
     this.y = y;
 }
 
 Player.prototype.update = function() {
-
+    if (this.y < 0) {
+        alert("You Win!");
+        player.reset();
+    }
 }
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function() {
+Player.prototype.handleInput = function(dir) {
+    if (dir == 'left' && this.x > 0) { this.x -= 100; }
+    if (dir == 'right' && this.x < 350) { this.x += 100; }
+    if (dir == 'up' && this.y > 0) { this.y -= 100; }
+    if (dir == 'down' && this.y < 400 ) { this.y += 100; }
+}
 
+//Reset Player to start
+Player.prototype.reset = function() {
+    this.y = 425;
+    this.x = 200;
 }
 
 // Now instantiate your objects.
