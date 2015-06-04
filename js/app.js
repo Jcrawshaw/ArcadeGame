@@ -8,6 +8,9 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    //Generate random number for enemy speed
+    var randomSpeed = (Math.random() * (200 - 50) + 50);
+    this.speed = randomSpeed;
 }
 
 // Update the enemy's position, required method for game
@@ -16,6 +19,11 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x < 505) {
+        this.x += this.speed * dt;
+    } else {
+        this.x = -25;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
