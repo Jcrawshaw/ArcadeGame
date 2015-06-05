@@ -8,8 +8,10 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.width = 32;
+    this.height = 25;
     //Generate random number for enemy speed
-    var randomSpeed = (Math.random() * (200 - 50) + 50);
+    var randomSpeed = (Math.random() * (250 - 100) + 100);
     this.speed = randomSpeed;
 }
 
@@ -39,6 +41,8 @@ var Player = function(x,y) {
     this.sprite = 'images/char-cat-girl.png';
     this.x = x;
     this.y = y;
+    this.width = 25;
+    this.height = 25;
 }
 
 Player.prototype.update = function() {
@@ -46,6 +50,7 @@ Player.prototype.update = function() {
         alert("You Win!");
         player.reset();
     }
+    player.detectCollision();
 }
 
 Player.prototype.render = function() {
@@ -57,6 +62,23 @@ Player.prototype.handleInput = function(dir) {
     if (dir == 'right' && this.x < 350) { this.x += 100; }
     if (dir == 'up' && this.y > 0) { this.y -= 100; }
     if (dir == 'down' && this.y < 400 ) { this.y += 100; }
+}
+
+//Collision Algorithm
+function collides(a,b) {
+    return a.x < b.x + b.width &&
+           a.x + a.width > b.x &&
+           a.y < b.y + b.height &&
+           a.y + a.height > b.y;
+}
+
+//Detect Collision
+Player.prototype.detectCollision = function() {
+    allEnemies.forEach(function(enemy) {
+        if (collides(enemy, player)) {
+            player.reset();
+        }
+    });
 }
 
 //Reset Player to start
