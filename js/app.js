@@ -13,7 +13,7 @@ var Enemy = function(x,y) {
     //Generate random number for enemy speed
     var randomSpeed = (Math.random() * (350 - 100) + 100);
     this.speed = randomSpeed;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -26,12 +26,12 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = -25;
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -43,33 +43,33 @@ var Player = function(x,y) {
     this.y = y;
     this.width = 30;
     this.height = 30;
-}
+};
 
 Player.prototype.update = function() {
     if (this.y < 0) {
         alert("You Win!");
-        player.reset();
+        this.reset();
     }
     player.detectCollision();
-}
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(dir) {
     if (dir == 'left' && this.x > 0) { this.x -= 100; }
     if (dir == 'right' && this.x < 350) { this.x += 100; }
     if (dir == 'up' && this.y > 0) { this.y -= 100; }
     if (dir == 'down' && this.y < 400 ) { this.y += 100; }
-}
+};
 
 //Collision Algorithm
 function collides(a,b) {
     return a.x < b.x + b.width &&
-           a.x + a.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
+       a.x + a.width > b.x &&
+       a.y < b.y + b.height &&
+       a.y + a.height > b.y;
 }
 
 //Detect Collision
@@ -79,13 +79,13 @@ Player.prototype.detectCollision = function() {
             player.reset();
         }
     });
-}
+};
 
 //Reset Player to start
 Player.prototype.reset = function() {
     this.y = 425;
     this.x = 200;
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
