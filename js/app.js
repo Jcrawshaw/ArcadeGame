@@ -8,10 +8,10 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.width = 32;
-    this.height = 25;
+    this.width = 40;
+    this.height = 30;
     //Generate random number for enemy speed
-    var randomSpeed = (Math.random() * (250 - 100) + 100);
+    var randomSpeed = (Math.random() * (350 - 100) + 100);
     this.speed = randomSpeed;
 }
 
@@ -41,8 +41,8 @@ var Player = function(x,y) {
     this.sprite = 'images/char-cat-girl.png';
     this.x = x;
     this.y = y;
-    this.width = 25;
-    this.height = 25;
+    this.width = 30;
+    this.height = 30;
 }
 
 Player.prototype.update = function() {
